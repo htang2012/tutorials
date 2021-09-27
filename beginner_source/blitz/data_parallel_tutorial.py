@@ -46,6 +46,13 @@ import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 
+# the following environs configurations setup 
+# to run on two GPUs (0,2) on a 3 GPU machine
+
+import os
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0,2"
+
 # Parameters and DataLoaders
 input_size = 5
 output_size = 2
