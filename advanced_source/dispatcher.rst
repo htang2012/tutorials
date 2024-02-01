@@ -109,7 +109,7 @@ speaking, the structure of your registrations will look like this:
 For operators that do not need autograd
 ---------------------------------------
 
-Note: This section only applies to versions of PyTorch ``>= 3.10``.
+Note: This section only applies to versions of PyTorch ``>= 1.10``.
 
 In the next section, we will discuss how to add autograd support to an operator.
 But for the ops that do not need autograd support, the following kernel should be
@@ -129,7 +129,7 @@ for debugging in larger models where previously it can be hard to pin-point
 exactly where the ``requires_grad``-ness is lost during the forward pass.
 
 In-place or view ops
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
 
 To ensure correctness and best possible performance, if your op mutates an input
 in-place or returns a tensor that aliases with one of the inputs, two additional

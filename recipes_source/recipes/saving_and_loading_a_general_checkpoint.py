@@ -42,7 +42,7 @@ available.
 # -----
 # 
 # 1. Import all necessary libraries for loading our data
-# 2. Define and intialize the neural network
+# 2. Define and initialize the neural network
 # 3. Initialize the optimizer
 # 4. Save the general checkpoint
 # 5. Load the general checkpoint
@@ -60,7 +60,7 @@ import torch.optim as optim
 
 
 ######################################################################
-# 2. Define and intialize the neural network
+# 2. Define and initialize the neural network
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # 
 # For sake of example, we will create a neural network for training
@@ -129,7 +129,7 @@ torch.save({
 # 
 
 model = Net()
-optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 
 checkpoint = torch.load(PATH)
 model.load_state_dict(checkpoint['model_state_dict'])
@@ -152,11 +152,4 @@ model.train()
 # 
 # Congratulations! You have successfully saved and loaded a general
 # checkpoint for inference and/or resuming training in PyTorch.
-# 
-# Learn More
-# ----------
-# 
-# Take a look at these other recipes to continue your learning:
-# 
-# -  TBD
-# -  TBD
+#

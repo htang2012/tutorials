@@ -60,7 +60,7 @@ functions to be familiar with:
 # linear layers, etc.) and registered buffers (batchnorm's running_mean)
 # have entries in the model’s *state_dict*. Optimizer
 # objects (``torch.optim``) also have a *state_dict*, which contains
-# information about the optimizer’s state, as well as the hyperparameters
+# information about the optimizer's state, as well as the hyperparameters
 # used.
 #
 # Because *state_dict* objects are Python dictionaries, they can be easily
@@ -115,7 +115,7 @@ functions to be familiar with:
 #
 # **Output:**
 #
-# ::
+# .. code-block:: sh
 #
 #    Model's state_dict:
 #    conv1.weight     torch.Size([6, 3, 5, 5])
@@ -158,9 +158,9 @@ functions to be familiar with:
 #
 # .. note::
 #     The 1.6 release of PyTorch switched ``torch.save`` to use a new
-#     zipfile-based file format. ``torch.load`` still retains the ability to
+#     zip file-based format. ``torch.load`` still retains the ability to
 #     load files in the old format. If for any reason you want ``torch.save``
-#     to use the old format, pass the kwarg ``_use_new_zipfile_serialization=False``.
+#     to use the old format, pass the ``kwarg``parameter ``_use_new_zipfile_serialization=False``.
 #
 # When saving a model for inference, it is only necessary to save the
 # trained model’s learned parameters. Saving the model’s *state_dict* with
@@ -175,7 +175,7 @@ functions to be familiar with:
 # normalization layers to evaluation mode before running inference.
 # Failing to do this will yield inconsistent inference results.
 #
-# .. Note ::
+# .. note::
 #
 #    Notice that the ``load_state_dict()`` function takes a dictionary
 #    object, NOT a path to a saved object. This means that you must
@@ -183,7 +183,7 @@ functions to be familiar with:
 #    ``load_state_dict()`` function. For example, you CANNOT load using
 #    ``model.load_state_dict(PATH)``.
 #
-# .. Note ::
+# .. note::
 #    
 #    If you only plan to keep the best performing model (according to the 
 #    acquired validation loss), don't forget that ``best_model_state = model.state_dict()``
@@ -227,6 +227,42 @@ functions to be familiar with:
 # normalization layers to evaluation mode before running inference.
 # Failing to do this will yield inconsistent inference results.
 #
+# Export/Load Model in TorchScript Format
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#
+# One common way to do inference with a trained model is to use
+# `TorchScript <https://pytorch.org/docs/stable/jit.html>`__, an intermediate
+# representation of a PyTorch model that can be run in Python as well as in a
+# high performance environment like C++. TorchScript is actually the recommended model format
+# for scaled inference and deployment.
+#
+# .. note::
+#    Using the TorchScript format, you will be able to load the exported model and
+#    run inference without defining the model class.
+#
+# **Export:**
+#
+# .. code:: python
+#
+#    model_scripted = torch.jit.script(model) # Export to TorchScript
+#    model_scripted.save('model_scripted.pt') # Save
+#
+# **Load:**
+#
+# .. code:: python
+#
+#    model = torch.jit.load('model_scripted.pt')
+#    model.eval()
+#
+# Remember that you must call ``model.eval()`` to set dropout and batch
+# normalization layers to evaluation mode before running inference.
+# Failing to do this will yield inconsistent inference results.
+#
+# For more information on TorchScript, feel free to visit the dedicated
+# `tutorials <https://pytorch.org/tutorials/beginner/Intro_to_TorchScript_tutorial.html>`__.
+# You will get familiar with the tracing conversion and learn how to
+# run a TorchScript module in a `C++ environment <https://pytorch.org/tutorials/advanced/cpp_export.html>`__.
+
 
 
 ######################################################################
@@ -266,7 +302,7 @@ functions to be familiar with:
 #
 # When saving a general checkpoint, to be used for either inference or
 # resuming training, you must save more than just the model’s
-# *state_dict*. It is important to also save the optimizer’s *state_dict*,
+# *state_dict*. It is important to also save the optimizer's *state_dict*,
 # as this contains buffers and parameters that are updated as the model
 # trains. Other items that you may want to save are the epoch you left off
 # on, the latest recorded training loss, external ``torch.nn.Embedding``
@@ -467,7 +503,7 @@ functions to be familiar with:
 #
 # When loading a model on a GPU that was trained and saved on CPU, set the
 # ``map_location`` argument in the ``torch.load()`` function to
-# *cuda:device_id*. This loads the model to a given GPU device. Next, be
+# ``cuda:device_id``. This loads the model to a given GPU device. Next, be
 # sure to call ``model.to(torch.device('cuda'))`` to convert the model’s
 # parameter tensors to CUDA tensors. Finally, be sure to use the
 # ``.to(torch.device('cuda'))`` function on all model inputs to prepare

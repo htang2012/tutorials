@@ -144,7 +144,7 @@ out.backward(torch.randn(1, 10))
 # `loss functions <https://pytorch.org/docs/nn.html#loss-functions>`_ under the
 # nn package .
 # A simple loss is: ``nn.MSELoss`` which computes the mean-squared error
-# between the input and the target.
+# between the output and the target.
 #
 # For example:
 
@@ -161,7 +161,7 @@ print(loss)
 # ``.grad_fn`` attribute, you will see a graph of computations that looks
 # like this:
 #
-# ::
+# .. code-block:: sh
 #
 #     input -> conv2d -> relu -> maxpool2d -> conv2d -> relu -> maxpool2d
 #           -> flatten -> linear -> relu -> linear -> relu -> linear
@@ -219,7 +219,9 @@ print(net.conv1.bias.grad)
 # The simplest update rule used in practice is the Stochastic Gradient
 # Descent (SGD):
 #
-#      ``weight = weight - learning_rate * gradient``
+# .. code:: python
+#
+#     weight = weight - learning_rate * gradient
 #
 # We can implement this using simple Python code:
 #
@@ -233,22 +235,25 @@ print(net.conv1.bias.grad)
 # update rules such as SGD, Nesterov-SGD, Adam, RMSProp, etc.
 # To enable this, we built a small package: ``torch.optim`` that
 # implements all these methods. Using it is very simple:
-
-import torch.optim as optim
-
-# create your optimizer
-optimizer = optim.SGD(net.parameters(), lr=0.01)
-
-# in your training loop:
-optimizer.zero_grad()   # zero the gradient buffers
-output = net(input)
-loss = criterion(output, target)
-loss.backward()
-optimizer.step()    # Does the update
+#
+# .. code:: python
+#
+#     import torch.optim as optim
+#
+#     # create your optimizer
+#     optimizer = optim.SGD(net.parameters(), lr=0.01)
+#
+#     # in your training loop:
+#     optimizer.zero_grad()   # zero the gradient buffers
+#     output = net(input)
+#     loss = criterion(output, target)
+#     loss.backward()
+#     optimizer.step()    # Does the update
+#
 
 
 ###############################################################
-# .. Note::
+# .. note::
 #
 #       Observe how gradient buffers had to be manually set to zero using
 #       ``optimizer.zero_grad()``. This is because gradients are accumulated

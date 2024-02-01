@@ -10,7 +10,7 @@ General
 .. code-block:: python
 
     import torch                                        # root package
-    from torch.utils.data import Dataset, Dataloader    # dataset representation and loading
+    from torch.utils.data import Dataset, DataLoader    # dataset representation and loading
 
 Neural Network API
 ------------------
@@ -29,8 +29,8 @@ See `autograd <https://pytorch.org/docs/stable/autograd.html>`__,
 `functional <https://pytorch.org/docs/stable/nn.html#torch-nn-functional>`__
 and `optim <https://pytorch.org/docs/stable/optim.html>`__
 
-Torchscript and JIT
----------------
+TorchScript and JIT
+-------------------
 
 .. code-block:: python
 
@@ -237,7 +237,7 @@ Learning rate scheduling
 .. code-block:: python
 
     scheduler = optim.X(optimizer,...)      # create lr scheduler
-    scheduler.step()                        # update lr at start of epoch
+    scheduler.step()                        # update lr after optimizer updates weights
     optim.lr_scheduler.X                    # where X is LambdaLR, MultiplicativeLR,
                                             # StepLR, MultiStepLR, ExponentialLR,
                                             # CosineAnnealingLR, ReduceLROnPlateau, CyclicLR,
@@ -261,8 +261,8 @@ Datasets
 See
 `datasets <https://pytorch.org/docs/stable/data.html?highlight=dataset#torch.utils.data.Dataset>`__
 
-Dataloaders and DataSamplers
-----------------------------
+Dataloaders and ``DataSamplers``
+--------------------------------
 
 .. code-block:: python
 
@@ -283,9 +283,6 @@ Also see
 
 -  `Deep Learning with PyTorch: A 60 Minute
    Blitz <https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html>`__
-   *(pytorch.org)*
 -  `PyTorch Forums <https://discuss.pytorch.org/>`__
-   *(discuss.pytorch.org)*
 -  `PyTorch for Numpy
    users <https://github.com/wkentaro/pytorch-for-numpy-users>`__
-   *(github.com/wkentaro/pytorch-for-numpy-users)*

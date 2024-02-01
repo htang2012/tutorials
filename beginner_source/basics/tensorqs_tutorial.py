@@ -80,7 +80,7 @@ print(f"Zeros Tensor: \n {zeros_tensor}")
 
 ######################################################################
 # Attributes of a Tensor
-# ~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~
 #
 # Tensor attributes describe their shape, datatype, and the device on which they are stored.
 
@@ -97,7 +97,7 @@ print(f"Device tensor is stored on: {tensor.device}")
 
 ######################################################################
 # Operations on Tensors
-# ~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~
 #
 # Over 100 tensor operations, including arithmetic, linear algebra, matrix manipulation (transposing,
 # indexing, slicing), sampling and more are
@@ -112,7 +112,7 @@ print(f"Device tensor is stored on: {tensor.device}")
 
 # We move our tensor to the GPU if available
 if torch.cuda.is_available():
-    tensor = tensor.to('cuda')
+    tensor = tensor.to("cuda")
 
 
 ######################################################################
@@ -124,16 +124,16 @@ if torch.cuda.is_available():
 # **Standard numpy-like indexing and slicing:**
 
 tensor = torch.ones(4, 4)
-print('First row: ', tensor[0])
-print('First column: ', tensor[:, 0])
-print('Last column:', tensor[..., -1])
+print(f"First row: {tensor[0]}")
+print(f"First column: {tensor[:, 0]}")
+print(f"Last column: {tensor[..., -1]}")
 tensor[:,1] = 0
 print(tensor)
 
 ######################################################################
 # **Joining tensors** You can use ``torch.cat`` to concatenate a sequence of tensors along a given dimension.
 # See also `torch.stack <https://pytorch.org/docs/stable/generated/torch.stack.html>`__,
-# another tensor joining op that is subtly different from ``torch.cat``.
+# another tensor joining operator that is subtly different from ``torch.cat``.
 t1 = torch.cat([tensor, tensor, tensor], dim=1)
 print(t1)
 
@@ -142,10 +142,11 @@ print(t1)
 # **Arithmetic operations**
 
 # This computes the matrix multiplication between two tensors. y1, y2, y3 will have the same value
+# ``tensor.T`` returns the transpose of a tensor
 y1 = tensor @ tensor.T
 y2 = tensor.matmul(tensor.T)
 
-y3 = torch.rand_like(tensor)
+y3 = torch.rand_like(y1)
 torch.matmul(tensor, tensor.T, out=y3)
 
 
@@ -172,7 +173,7 @@ print(agg_item, type(agg_item))
 # Operations that store the result into the operand are called in-place. They are denoted by a ``_`` suffix.
 # For example: ``x.copy_(y)``, ``x.t_()``, will change ``x``.
 
-print(tensor, "\n")
+print(f"{tensor} \n")
 tensor.add_(5)
 print(tensor)
 
